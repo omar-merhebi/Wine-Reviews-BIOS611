@@ -17,7 +17,7 @@ docker run -p 8787:8787 -it --rm \
 -e PASSWORD="$(cat .password)" \
 -v $HOME/.ssh \
 -v $HOME/.gitconfig \
--v $(pwd):/home/rstudio/work \
+-v $(pwd):/home/rstudio \
 wine-reviews
 ```
 
