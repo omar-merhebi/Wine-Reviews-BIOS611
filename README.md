@@ -13,12 +13,12 @@ docker build . --build-arg user_pass="$(cat .password)" -t wine-reviews
 This will create a docker container. Then from a unix command line, you can start the server by running:
 
 ```
-docker run -p 8787:8787 -it --rm \
+docker run -p 8787:8787 --rm \
            -e PASSWORD="$(cat .password)" \
            -v $HOME/.ssh \
            -v $HOME/.gitconfig \
            -v $(pwd):/home/rstudio \
-           wine-reviews
+           -it wine-reviews
 ```
 
 The server can be accessed at http://localhost:8787 via the browser on your machine. Use the username "rstudio" and the password you created in `.password` to log in. 
