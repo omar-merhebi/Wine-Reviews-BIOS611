@@ -1,7 +1,8 @@
 .local/*
 .config/*
 __pycache__/*
-.created-dirs
-.password
+nltk_data/*
+
+.*
 
 *.csv
