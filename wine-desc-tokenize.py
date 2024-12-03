@@ -18,15 +18,46 @@ def main():
     wine_word_counts = get_word_counts_per_wine(wine_reviews)
     total_word_counts = get_total_word_count(wine_word_counts)
 
-    # print(total_word_counts)
+    # we want to filter down to words that have a word count of at least
+    # 1000, as there are over 80,000 wines in the cleaned dataset and we
+    # want to make sure we don't have too many words that are only present in
+    # a few wines
+
+    filtered_words = [word for word, count in total_word_counts.items()
+                      if count >= 1000]
+
+    word_vectors = convert_to_vectors(wine_word_counts, filtered_words)
+
+    # We turn these word counts into columns and append them to the existing df
+
+    word_columns = pd.DataFrame.from_dict(word_vectors, orient='index',
+                                          columns=filtered_words)
+
+    # now we can concetenate the new columns in
+    wine_reviews_with_tokens = pd.concat([wine_reviews, word_columns], axis=1)
+
+    # let's drop the description column now
+    wine_reviews_with_tokens.drop(columns='description',
+                                  inplace=True)
+
+    wine_reviews_with_tokens.to_csv('./data/processed/wine-reviews-tokenized.csv')
+
+
+def convert_to_vectors(wine_word_counts, filtered_words):
+    word_vectors = {}
+
+    for index, word_counts in wine_word_counts.items():
+        vector = [word_counts.get(word, 0) for word in filtered_words]
+        word_vectors[index] = vector
+
+    return word_vectors
 
 
 def get_total_word_count(wine_word_counts):
     # We get the total word counts for each word across all wine descriptions.
     total_word_count = Counter()
 
-    for word_counts in wine_word_counts:
-        print(word_counts)
+    for word_counts in wine_word_counts.values():
         total_word_count.update(word_counts)
 
     return total_word_count
