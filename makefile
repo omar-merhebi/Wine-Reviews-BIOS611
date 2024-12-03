@@ -1,4 +1,4 @@
-all: data/raw/archive.zip data/raw/wine-reviews.csv data/processed/wine-reviews-clean.csv
+all: .created-dirs data/raw/archive.zip data/raw/wine-reviews.csv data/processed/wine-reviews-clean.csv
 
 .created-dirs:
 	mkdir -p data/raw
@@ -23,3 +23,4 @@ data/processed/wine-reviews-clean.csv:  .created-dirs data/raw/wine-reviews.csv
 
 clean:
 	rm -rf data/
+	rm -f .created-dirs
