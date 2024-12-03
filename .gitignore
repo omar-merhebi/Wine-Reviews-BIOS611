@@ -1,5 +1,7 @@
-*.csv
-.password
 .local/*
 .config/*
 __pycache__/*
+.created-dirs
+.password
+
+*.csv
