@@ -2,3 +2,4 @@
 .password
 .local/*
 .config/*
+__pycache__/*
