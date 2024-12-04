@@ -20,6 +20,7 @@ other_unwanted_words = ['wine', 'finish', 'blend', 'aroma', 'palate',
 
 STOP_WORDS.update(other_unwanted_words)
 
+
 def main():
     wine_reviews = pd.read_csv('data/processed/wine-reviews-clean.csv')
     wine_word_counts = get_word_counts_per_wine(wine_reviews)
