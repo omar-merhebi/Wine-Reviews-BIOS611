@@ -8,10 +8,9 @@ from sklearn.preprocessing import StandardScaler
 def main():
     # read in data
     data = pd.read_csv('data/processed/wine-reviews-nn.csv')
-    train_nn(data)
+    train_and_evaluate_models(data)
 
-
-def train_nn(data):
+def train_and_evaluate_models(data):
     X = data.drop(columns=['Price', 'Points'], inplace=False)
     y_price = data['Price']
     y_points = data['Points']
@@ -35,11 +34,11 @@ def train_nn(data):
     points_model = build_model(input_dim)
 
     print('Training Models')
-    price_model.fit(X_train, y_price_train, epochs=20, batch_size=100,
+    price_model.fit(X_train, y_price_train, epochs=10, batch_size=100,
                     validation_split=0.2)
-    points_model.fit(X_train, y_points_test, epochs=20, batch_size=100,
+    points_model.fit(X_train, y_points_test, epochs=10, batch_size=100,
                      validation_split=0.2)
-
+    
 
 def build_model(input_dim):
     model = tf.keras.Sequential([
