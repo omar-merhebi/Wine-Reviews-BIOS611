@@ -6,3 +6,4 @@ nltk_data/*
 .*
 
 *.csv
+*.png
