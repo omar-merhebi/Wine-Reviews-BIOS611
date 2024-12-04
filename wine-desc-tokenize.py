@@ -54,7 +54,8 @@ def main():
     wine_reviews_with_tokens.drop(columns='Description',
                                   inplace=True)
 
-    wine_reviews_with_tokens.to_csv('./data/processed/wine-reviews-tokenized.csv')
+    wine_reviews_with_tokens.to_csv(
+        './data/processed/wine-reviews-tokenized.csv')
 
 
 def convert_to_vectors(wine_word_counts, filtered_words):
