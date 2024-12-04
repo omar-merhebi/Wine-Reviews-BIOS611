@@ -3,6 +3,7 @@ all: .created-dirs .downloaded .processed
 .created-dirs:
 	mkdir -p data/raw
 	mkdir -p data/processed
+	mkdir -p figures/
 	touch .created-dirs
 
 # Here we download and extract the raw data
