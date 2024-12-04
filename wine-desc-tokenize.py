@@ -15,8 +15,8 @@ STOP_WORDS = set(nltk.corpus.stopwords.words('english'))
 # we are going to add certain words we also don't want into STOP_WORDS, such
 # as "wine", "blend", "finish".
 
-other_unwanted_words =['wine', 'finish', 'blend', 'aroma', 'palate', 
-                       'drink', 'red', 'white']
+other_unwanted_words = ['wine', 'finish', 'blend', 'aroma', 'palate',
+                        'drink', 'red', 'white', 'flavor']
 
 STOP_WORDS.update(other_unwanted_words)
 
@@ -39,7 +39,7 @@ def main():
 
     word_columns = pd.DataFrame.from_dict(word_vectors, orient='index',
                                           columns=filtered_words)
-    
+
     # Some of the new words (like year and variety) are also names of columms
     # in the dataset. I'm going to capitalize the names of the original columns
     # to avoid mix-ups
