@@ -7,7 +7,7 @@ wine_reviews <- wine_reviews %>%
   rename(ID = `...1`)
 
 wine_reviews<- wine_reviews %>%
-  select(-c(Points, Price, Province, Taster, Variety, Year))
+  select(-c(Points, Price, Taster, Variety, Year))
 
 # Group by continent cause there are too many countries to color code
 north_america <- c('Canada', 'Mexico', 'US')
