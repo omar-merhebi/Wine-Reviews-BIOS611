@@ -2,6 +2,7 @@ import tensorflow as tf
 import pandas as pd
 
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 
 
 def main():
@@ -23,19 +24,21 @@ def train_nn(data):
         X, y_points, test_size=0.2, random_state=416
     )
 
+    # Scale the numerical data
+    scaler = StandardScaler()
+    X_train = scaler.fit_transform(X_train)
+    X_test = scaler.fit_transform(X_test)
+
     input_dim = X_train.shape[1]
 
     price_model = build_model(input_dim)
     points_model = build_model(input_dim)
 
-    print('Training Price Prediction Model')
+    print('Training Models')
     price_model.fit(X_train, y_price_train, epochs=20, batch_size=100,
                     validation_split=0.2)
-
-    print('Evaluating Price Prediction Model on Test Data')
-    price_loss, price_mae = price_model.evaluate(X_test, y_price_test)
-    print(f'Price Prediction Loss: {price_loss}')
-    print(f'Price Prediction MAE: {price_mae}')
+    points_model.fit(X_train, y_points_test, epochs=20, batch_size=100,
+                     validation_split=0.2)
 
 
 def build_model(input_dim):
