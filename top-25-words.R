@@ -25,4 +25,4 @@ top_25_words_plot <- gathered_wine_total_counts %>%
         panel.grid = element_blank()) +
   labs(x="Word", y="Total Count")
 
-ggsave('figures/top_25_words.png', plot=top_25_words_plot)
+ggsave('figures/top-25-words.png', plot=top_25_words_plot)
