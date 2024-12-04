@@ -13,5 +13,19 @@ def train_nn(data):
     y_points = data['Points']
 
 
+def build_model(input_dim):
+    model = tf.keras.Sequential([
+        tf.keras.layers.Dense(1280, activation='relu',
+                              input_shape=(input_dim,)),
+        tf.keras.layers.Dense(640, activation='relu'),
+        tf.keras.layers.Dense(128, activation='relu'),
+        tf.keras.layers.Dense(1)
+    ])
+
+    model.compile(optimizer='adam', loss='mse', metrics=['mae'])
+
+    return model
+
+
 if __name__ == '__main__':
     main()
