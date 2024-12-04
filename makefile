@@ -1,4 +1,4 @@
-all: .created-dirs .downloaded .processed
+all: .created-dirs .downloaded .processed .figures
 
 .created-dirs:
 	mkdir -p data/raw
@@ -17,11 +17,18 @@ all: .created-dirs .downloaded .processed
 	python3 wine-desc-tokenize.py
 	touch .processed
 
+.figures: .created-dirs .downloaded .processed
+	Rscript top-25-words.R
+	Rscript pca.R
+	touch .figures
+
 .PHONY: clean
 
 clean:
 	rm -rf data/
 	rm -rf nltk_data/
+	rm -rf figures/
+	rm -rf __pycache__/
 	rm -f .created-dirs
 	rm -f .downloaded
 	rm -f .processed
