@@ -43,7 +43,7 @@ def main():
     wine_reviews_with_tokens = pd.concat([wine_reviews, word_columns], axis=1)
 
     # let's drop the description column now
-    wine_reviews_with_tokens.drop(columns='description',
+    wine_reviews_with_tokens.drop(columns='Description',
                                   inplace=True)
 
     wine_reviews_with_tokens.to_csv('./data/processed/wine-reviews-tokenized.csv')
