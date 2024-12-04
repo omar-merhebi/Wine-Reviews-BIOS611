@@ -15,6 +15,7 @@ all: .created-dirs .downloaded .processed .figures
 	unzip data/raw/archive.zip -d data/raw/extract && mv data/raw/extract/winemag-data-130k-v2.csv data/raw/wine-reviews.csv && rm -rf data/raw/archive.zip data/raw/extract/
 	Rscript preprocess.R
 	python3 wine-desc-tokenize.py
+	Rscript one-hot-encode.R
 	touch .processed
 
 .figures: .created-dirs .downloaded .processed
