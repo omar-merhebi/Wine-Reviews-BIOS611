@@ -32,6 +32,12 @@ def main():
 
     word_columns = pd.DataFrame.from_dict(word_vectors, orient='index',
                                           columns=filtered_words)
+    
+    # Some of the new words (like year and variety) are also names of columms
+    # in the dataset. I'm going to capitalize the names of the original columns
+    # to avoid mix-ups
+
+    wine_reviews.columns = wine_reviews.columns.str.capitalize()
 
     # now we can concetenate the new columns in
     wine_reviews_with_tokens = pd.concat([wine_reviews, word_columns], axis=1)
