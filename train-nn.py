@@ -10,6 +10,7 @@ def main():
     data = pd.read_csv('data/processed/wine-reviews-nn.csv')
     train_and_evaluate_models(data)
 
+
 def train_and_evaluate_models(data):
     X = data.drop(columns=['Price', 'Points'], inplace=False)
     y_price = data['Price']
@@ -36,9 +37,21 @@ def train_and_evaluate_models(data):
     print('Training Models')
     price_model.fit(X_train, y_price_train, epochs=10, batch_size=100,
                     validation_split=0.2)
-    points_model.fit(X_train, y_points_test, epochs=10, batch_size=100,
+    points_model.fit(X_train, y_points_train, epochs=10, batch_size=100,
                      validation_split=0.2)
-    
+
+    price_predictions = price_model.predict(X_test)
+    points_predictions = points_model.predict(X_test)
+
+    results = pd.DataFrame({
+        'price': y_price_test.values,
+        'price_pred': price_predictions.flatten(),
+        'points': y_points_test.values,
+        'points_pred': points_predictions.flatten()
+    })
+
+    results.to_csv('data/results/wine_predictions.csv')
+
 
 def build_model(input_dim):
     model = tf.keras.Sequential([
@@ -50,7 +63,6 @@ def build_model(input_dim):
     ])
 
     model.compile(optimizer='adam', loss='mse', metrics=['mae'])
-
     return model
 
 
