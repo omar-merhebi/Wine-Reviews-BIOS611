@@ -12,6 +12,13 @@ nltk.download('wordnet')
 
 STOP_WORDS = set(nltk.corpus.stopwords.words('english'))
 
+# we are going to add certain words we also don't want into STOP_WORDS, such
+# as "wine", "blend", "finish".
+
+other_unwanted_words =['wine', 'finish', 'blend', 'aroma', 'palate', 
+                       'drink', 'red', 'white']
+
+STOP_WORDS.update(other_unwanted_words)
 
 def main():
     wine_reviews = pd.read_csv('data/processed/wine-reviews-clean.csv')
