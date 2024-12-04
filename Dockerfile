@@ -13,4 +13,4 @@ COPY requirements.txt /app/requirements.txt
 RUN pip install --upgrade pip 
 RUN pip install -r requirements.txt
 
-RUN Rscript --no-restore --no-save -e "install.packages('tidyverse')"
+RUN Rscript --no-restore --no-save -e "install.packages(c('tidyverse', 'ggfortify'))"
