@@ -40,11 +40,11 @@ def train_and_evaluate_models(data):
                                                   mode='min')
 
     price_checkpoint_save = tf.keras.callbacks.ModelCheckpoint(
-        'models/best_price_model.hdf5', save_best_only=True,
+        'models/best_price_model.keras', save_best_only=True,
         monitor='val_loss', mode='min')
 
     points_checkpoint_save = tf.keras.callbacks.ModelCheckpoint(
-        'models/best_points_model.hdf5', save_best_only=True,
+        'models/best_points_model.keras', save_best_only=True,
         monitor='val_loss', mode='min')
 
     print('Training Models')
