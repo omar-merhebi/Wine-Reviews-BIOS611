@@ -5,6 +5,7 @@ all: .created-dirs .downloaded .processed .figures .predictions
 	mkdir -p data/processed
 	mkdir -p data/results
 	mkdir -p figures/
+	mkdir -p models/
 	touch .created-dirs
 
 # Here we download and extract the raw data
