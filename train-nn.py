@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler
 def main():
     # read in data
     data = pd.read_csv('data/processed/wine-reviews-nn.csv')
-    train_and_evaluate_models(data)
+    price_model, points_model = train_and_evaluate_models(data)
 
 
 def train_and_evaluate_models(data):
@@ -33,7 +33,7 @@ def train_and_evaluate_models(data):
 
     price_model = build_model(input_dim)
     points_model = build_model(input_dim)
-    
+
     # Add callbacks for early stopping based on validation set loss
     callback = tf.keras.EarlyStoppping(monitor='val_loss',  patience=3)
 
@@ -54,6 +54,8 @@ def train_and_evaluate_models(data):
     })
 
     results.to_csv('data/results/wine_predictions.csv')
+
+    return price_model, points_model
 
 
 def build_model(input_dim):
