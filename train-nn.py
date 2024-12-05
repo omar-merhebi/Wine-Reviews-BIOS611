@@ -35,16 +35,17 @@ def train_and_evaluate_models(data):
     points_model = build_model(input_dim)
 
     # Add callbacks for early stopping based on validation set loss
-    early_stop = tf.keras.EarlyStoppping(monitor='val_loss',  patience=3,
-                                       mode='min')
+    early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss',
+                                                  patience=3,
+                                                  mode='min')
 
-    price_checkpoint_save = tf.keras.ModelCheckpoint(
+    price_checkpoint_save = tf.keras.callbacks.ModelCheckpoint(
         'models/best_price_model.hdf5', save_best_only=True,
-        monitor='val_loss', mode='min', patience=3)
+        monitor='val_loss', mode='min')
 
-    points_checkpoint_save = tf.keras.ModelCheckpoint(
+    points_checkpoint_save = tf.keras.callbacks.ModelCheckpoint(
         'models/best_points_model.hdf5', save_best_only=True,
-        monitor='val_loss', mode='min', patience=3)
+        monitor='val_loss', mode='min')
 
     print('Training Models')
     price_model.fit(X_train, y_price_train, epochs=20, batch_size=100,
