@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler
 def main():
     # read in data
     data = pd.read_csv('data/processed/wine-reviews-nn.csv')
-    price_model, points_model = train_and_evaluate_models(data)
+    train_and_evaluate_models(data)
 
 
 def train_and_evaluate_models(data):
@@ -35,13 +35,24 @@ def train_and_evaluate_models(data):
     points_model = build_model(input_dim)
 
     # Add callbacks for early stopping based on validation set loss
-    callback = tf.keras.EarlyStoppping(monitor='val_loss',  patience=3)
+    early_stop = tf.keras.EarlyStoppping(monitor='val_loss',  patience=3,
+                                       mode='min')
+
+    price_checkpoint_save = tf.keras.ModelCheckpoint(
+        'models/best_price_model.hdf5', save_best_only=True,
+        monitor='val_loss', mode='min', patience=3)
+
+    points_checkpoint_save = tf.keras.ModelCheckpoint(
+        'models/best_points_model.hdf5', save_best_only=True,
+        monitor='val_loss', mode='min', patience=3)
 
     print('Training Models')
     price_model.fit(X_train, y_price_train, epochs=20, batch_size=100,
-                    validation_split=0.2, callbacks=[callback])
+                    validation_split=0.2,
+                    callbacks=[early_stop, price_checkpoint_save])
     points_model.fit(X_train, y_points_train, epochs=20, batch_size=100,
-                     validation_split=0.2, callbacks=[callback])
+                     validation_split=0.2,
+                     callbacks=[early_stop, points_checkpoint_save])
 
     price_predictions = price_model.predict(X_test)
     points_predictions = points_model.predict(X_test)
@@ -54,8 +65,6 @@ def train_and_evaluate_models(data):
     })
 
     results.to_csv('data/results/wine_predictions.csv')
-
-    return price_model, points_model
 
 
 def build_model(input_dim):
