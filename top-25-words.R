@@ -6,7 +6,7 @@ wine_reviews <- wine_reviews %>%
   rename(ID = `...1`)
 
 wine_reviews_for_pca <- wine_reviews %>%
-  select(-c(Country, Points, Price, Taster, Variety, Year))
+  select(-c(Country, Continent, Points, Price, Taster, Variety, Year))
 
 gathered_wine_reviews <- wine_reviews_for_pca %>%
   gather(key="word", value="count", -ID)

@@ -16,4 +16,25 @@ wine_reviews <- wine_reviews %>%
 wine_reviews <- wine_reviews %>%
   filter(price <= 500)
 
+# Group by continent cause there are too many countries to color code
+north_america <- c('Canada', 'Mexico', 'US')
+south_america <- c('Argentina', 'Brazil', 'Chile', 'Peru', 'Uruguay')
+asia <- c('Armenia', 'China', 'Georgia', 'India', 'Israel', 'Lebanon', 'Turkey')
+africa <- c('Morocco', 'South Africa')
+europe <- c('Austria', 'Bosnia and Herzegovina', 'Bulgaria', 'Croatia', 'Cyprus', 'Czech Republic', 'England', 'France',
+            'Germany', 'Greece', 'Hungary', 'Italy', 'Luxembourg', 'Macedonia', 'Moldova', 'Portugal', 'Romania',
+            'Serbia', 'Slovenia', 'Spain', 'Switzerland', 'Ukraine')
+oceania <- c('Australia', 'New Zealand')
+
+# add continent column
+wine_reviews <- wine_reviews %>%
+  mutate(Continent = case_when(
+    country %in% north_america ~ "North America",
+    country %in% south_america ~ "South America",
+    country %in% asia ~ "Asia",
+    country %in% africa ~ "Africa",
+    country %in% europe ~ "Europe",
+    country %in% oceania ~ "Oceania"
+  ))
+
 write_csv(wine_reviews, 'data/processed/wine-reviews-clean.csv')
