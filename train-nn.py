@@ -24,6 +24,8 @@ def train_and_evaluate_models(data):
         X, y_points, test_size=0.2, random_state=416
     )
 
+    test_idx = X_test.index
+
     # Scale the numerical data
     scaler = StandardScaler()
     X_train = scaler.fit_transform(X_train)
@@ -59,6 +61,7 @@ def train_and_evaluate_models(data):
     points_predictions = points_model.predict(X_test)
 
     results = pd.DataFrame({
+        'wine_ID': test_idx,
         'price': y_price_test.values,
         'price_pred': price_predictions.flatten(),
         'points': y_points_test.values,
