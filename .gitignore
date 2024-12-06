@@ -3,7 +3,14 @@
 __pycache__/*
 nltk_data/*
 
-.*
-
 *.csv
 *.png
+*.keras
+
+.created-dirs
+.downloaded
+.figures
+.password
+.predictions
+.processed
+.sh_history
