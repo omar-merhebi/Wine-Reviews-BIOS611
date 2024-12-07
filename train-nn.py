@@ -38,6 +38,10 @@ def train_and_evaluate_models(data):
     price_model = build_model(input_dim)
     points_model = build_model(input_dim)
 
+    plot_model(price_model, show_shapes=True, show_layer_names=True,
+               show_layer_activations=True,
+               to_file='./figures/nn-diagram.png')
+
     # Add callbacks for early stopping based on validation set loss
     early_stop = tf.keras.callbacks.EarlyStopping(monitor='val_loss',
                                                   patience=3,
@@ -83,10 +87,6 @@ def build_model(input_dim):
     ])
 
     model.compile(optimizer='adam', loss='mse', metrics=['mae'])
-
-    plot_model(model, show_shapes=True, show_layer_names=True,
-               show_layer_activations=True,
-               to_file='./figures/nn-diagram.png')
 
     return model
 
