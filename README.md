@@ -22,3 +22,10 @@ docker run -p 8787:8787 --rm \
 ```
 
 The server can be accessed at http://localhost:8787 via the browser on your machine. Use the username "rstudio" and the password you created in `.password` to log in. 
+
+To run the analysis and build the report, run:
+```
+make
+```
+
+in the terminal on the RStudio session that you opened in the browser. This should run all the analyses, build all figures, and assemble the final report. You can view report.pdf once the make has completed to see the results. 
