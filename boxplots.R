@@ -23,4 +23,5 @@ points_boxplots <- points_comparison %>%
   theme_bw() +
   theme(panel.grid = element_blank())
 
-points_boxplots
+ggsave('figures/points-boxplots.png', points_boxplots)
+ggsave('figures/price-boxplots.png', price_boxplots)
