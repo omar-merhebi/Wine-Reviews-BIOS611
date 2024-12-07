@@ -30,6 +30,7 @@ all: .created-dirs .downloaded .processed .figures .predictions
 	Rscript top-25-words.R
 	Rscript pca.R
 	Rscript nn-result-scatterplots.R
+	Rscript boxplots.R
 	touch .figures
 
 .PHONY: clean
