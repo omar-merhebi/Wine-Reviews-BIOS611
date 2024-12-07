@@ -6,6 +6,7 @@ nltk_data/*
 *.csv
 *.png
 *.keras
+*.pdf
 
 .created-dirs
 .downloaded
