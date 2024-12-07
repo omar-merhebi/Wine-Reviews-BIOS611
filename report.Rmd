@@ -1,0 +1,5 @@
+# Predicting Wine Quality and Price
+
+## Introduction
+For this project, I am attempting to see if we can use a relatively simple neural network to predict the price and quality of wine based on a text-based description by a reviewer as well as some other characteristics such as its year and country/region of origin.
+
