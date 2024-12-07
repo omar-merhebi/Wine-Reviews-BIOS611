@@ -1,9 +1,11 @@
 ---
+title: "Predicting Wine Quality and Price"
+author: "Omar Merhebi"
+date: "`r Sys.Date()`"
 output:
   pdf_document:
     extra_dependencies: ["float"]
 ---
-# Predicting Wine Quality and Price
 
 ## Introduction
 For this project, I am attempting to see if we can use a relatively simple neural network to predict the price and quality of wine based on a text-based description by a reviewer as well as some other characteristics such as its year and country/region of origin. The quality in this dataset is determined by the number of points assigned by Wine Magazine. My hypothesis is that we will be able to create two neural nets, each with high predicitive power of price and quality using the tokenized description as well as the other variables from the dataset. 
