@@ -28,4 +28,10 @@ To run the analysis and build the report, run:
 make
 ```
 
+or 
+
+```
+make report.pdf
+```
+
 in the terminal on the RStudio session that you opened in the browser. This should run all the analyses, build all figures, and assemble the final report. You can view report.pdf once the make has completed to see the results. 
