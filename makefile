@@ -27,6 +27,7 @@ all: .created-dirs .downloaded .processed .figures .predictions
 .figures: .created-dirs .downloaded .processed .predictions
 	Rscript top-25-words.R
 	Rscript pca.R
+	Rscript nn-results-scatterplots.R
 	touch .figures
 
 .PHONY: clean
