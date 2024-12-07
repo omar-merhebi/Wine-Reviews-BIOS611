@@ -2,7 +2,7 @@ FROM rocker/verse
 
 ARG user_pass
 
-RUN apt update && apt install -y man make unzip curl python3-pip python3.12-venv software-properties-common graphviz
+RUN apt update && apt install -y man make unzip curl python3-pip python3.12-venv software-properties-common graphviz texlive-latex-recommended
 RUN echo "rstudio:$user_pass" | chpasswd
 RUN python3 -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
