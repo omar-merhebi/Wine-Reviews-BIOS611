@@ -19,7 +19,7 @@ gathered_wine_total_counts <- gathered_wine_reviews %>%
 top_25_words_plot <- gathered_wine_total_counts %>%
   top_n(25, wt=total_count) %>%
   ggplot(aes(x=reorder(word, -total_count), y=total_count)) +
-  geom_col(fill='lightblue') +
+  geom_col(fill='lightblue', color='white') +
   theme_bw() +
   theme(axis.text.x = element_text(angle=90, vjust=0.5, hjust=1),
         panel.grid = element_blank()) +
