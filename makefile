@@ -26,7 +26,7 @@ all: .created-dirs .downloaded .processed .figures .predictions
 	touch .predictions
 
 .figures: .created-dirs .downloaded .processed .predictions
-	Rscript continent-histogram.R
+	Rscript histograms.R
 	Rscript top-25-words.R
 	Rscript pca.R
 	Rscript nn-result-scatterplots.R
