@@ -61,14 +61,14 @@ def train_and_evaluate_models(data):
     points_predictions = points_model.predict(X_test)
 
     results = pd.DataFrame({
-        'wine_ID': test_idx,
+        'ID': test_idx,
         'price': y_price_test.values,
         'price_pred': price_predictions.flatten(),
         'points': y_points_test.values,
         'points_pred': points_predictions.flatten()
     })
 
-    results.to_csv('data/results/wine_predictions.csv')
+    results.to_csv('data/results/wine_predictions.csv', index=False)
 
 
 def build_model(input_dim):
