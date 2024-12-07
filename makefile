@@ -1,4 +1,4 @@
-all: .created-dirs .downloaded .processed .figures .predictions
+all: .created-dirs .downloaded .processed .figures .predictions report.pdf
 
 .created-dirs:
 	mkdir -p data/raw
@@ -32,6 +32,9 @@ all: .created-dirs .downloaded .processed .figures .predictions
 	Rscript nn-result-scatterplots.R
 	Rscript boxplots.R
 	touch .figures
+
+report.pdf: .figures .predictions .processed .downloaded .created-dirs
+	R -e "rmarkdown::render('report.Rmd', output_format='pdf_document')"
 
 .PHONY: clean
 
