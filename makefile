@@ -22,6 +22,7 @@ all: .created-dirs .downloaded .processed .figures .predictions
 
 .predictions: .created-dirs .downloaded .processed
 	python3 train-nn.py
+	Rscript join-post-prediction-data.R
 	touch .predictions
 
 .figures: .created-dirs .downloaded .processed .predictions
