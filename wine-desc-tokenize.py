@@ -17,7 +17,8 @@ STOP_WORDS = set(nltk.corpus.stopwords.words('english'))
 
 other_unwanted_words = ['wine', 'finish', 'blend', 'aroma', 'palate',
                         'drink', 'red', 'white', 'flavor', 'texture',
-                        'note', 'hint', 'show']
+                        'note', 'hint', 'show', 'nose', 'ha', 'offer',
+                        "touch"]
 
 STOP_WORDS.update(other_unwanted_words)
 
