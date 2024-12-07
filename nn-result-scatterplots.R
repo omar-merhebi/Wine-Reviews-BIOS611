@@ -1,8 +1,7 @@
 library(tidyverse)
 
 # Here we create figures that look at the results of the neural networks
-net_predictions <- read.csv('data/results/wine_predictions.csv') %>%
-  select(-X)
+net_predictions <- read.csv('data/results/wine_predictions.csv')
 
 # Scatter plots of predicted vs actual values
 price_scatter <- net_predictions %>%
@@ -17,4 +16,4 @@ points_scatter <- net_predictions %>%
   geom_abline(slope=1, color='red')
 
 ggsave('figures/price_prediction_scatterplot.png', plot=price_scatter)
-ggsace('figures/points_prediction_scatterplot.png', plot=points_scatter)
+ggsave('figures/points_prediction_scatterplot.png', plot=points_scatter)
