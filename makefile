@@ -43,3 +43,4 @@ clean:
 	rm -f .created-dirs
 	rm -f .downloaded
 	rm -f .processed
+	rm -f *.pdf
