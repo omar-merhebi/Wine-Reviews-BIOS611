@@ -4,6 +4,8 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
+from keras.utils import plot_model
+
 
 def main():
     # read in data
@@ -81,6 +83,11 @@ def build_model(input_dim):
     ])
 
     model.compile(optimizer='adam', loss='mse', metrics=['mae'])
+
+    plot_model(model, show_shapes=True, show_layer_names=True,
+               show_layer_activations=True,
+               to_file='./figures/nn-diagram.png')
+
     return model
 
 
