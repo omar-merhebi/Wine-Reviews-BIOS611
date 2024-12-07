@@ -14,6 +14,7 @@ def main():
 
 
 def train_and_evaluate_models(data):
+    tf.random.set_seed(416)
     X = data.drop(columns=['Price', 'Points'], inplace=False)
     y_price = data['Price']
     y_points = data['Points']
