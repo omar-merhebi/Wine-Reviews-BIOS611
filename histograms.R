@@ -31,6 +31,12 @@ prices <- wine_reviews %>%
   geom_histogram() + theme_bw() +
   theme(panel.grid = element_blank())
 
+points <- wine_reviews %>%
+  ggplot(aes(x=points)) +
+  geom_histogram(binwidth = 1) + theme_bw() +
+  theme(panel.grid = element_blank())
+
 ggsave('figures/histogram-by-continent.png', continents)
 ggsave('figures/histogram-by-price-full.png', prices_w_outliers)
 ggsave('figures/histogram-by-price-no-outliers.png', prices)
+ggsave('figures/histogram-by-points.png', points)
