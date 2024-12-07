@@ -5,15 +5,16 @@ net_predictions <- read.csv('data/results/wine_predictions.csv') %>%
   select(-X)
 
 # Scatter plots of predicted vs actual values
-net_predictions %>%
+price_scatter <- net_predictions %>%
   ggplot(aes(x=price, y=price_pred)) +
   geom_point(color='lightblue') + theme_bw() +
   geom_abline(slope=1, color='red') +
   theme(panel.grid = element_blank())
 
-net_predictions %>%
+points_scatter <- net_predictions %>%
   ggplot(aes(x=points, y=points_pred)) + 
   geom_point(color='lightblue') + theme_bw() +
   geom_abline(slope=1, color='red')
 
-# Boxplot comparison by continent
+ggsave('figures/price_prediction_scatterplot.png', plot=price_scatter)
+ggsace('figures/points_prediction_scatterplot.png', plot=points_scatter)
