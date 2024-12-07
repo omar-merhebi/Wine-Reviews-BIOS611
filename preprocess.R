@@ -11,11 +11,6 @@ wine_reviews <- wine_reviews %>%
   mutate(taster = str_extract(taster, "\\w+")) %>%
   drop_na()
 
-# Let's drop some outliers in terms of price.
-# Any wine over $500 will be considered an outlier 
-wine_reviews <- wine_reviews %>%
-  filter(price <= 500)
-
 # Group by continent cause there are too many countries to color code
 north_america <- c('Canada', 'Mexico', 'US')
 south_america <- c('Argentina', 'Brazil', 'Chile', 'Peru', 'Uruguay')

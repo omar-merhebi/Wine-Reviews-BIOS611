@@ -3,8 +3,10 @@ library(caret)
 
 wine_reviews <- read.csv('data/processed/wine-reviews-tokenized.csv')
 
+# Drop outliers (price <= 77)
 wine_reviews <- wine_reviews %>%
-  select(-X)
+  select(-X) %>%
+  filter(Price <= 77)
 
 # Convert "Year" to a factor because we don't want this treated as a numeric value but a categorical label
 wine_reviews$Year <- as.factor(wine_reviews$Year)
