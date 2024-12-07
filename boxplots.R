@@ -11,7 +11,11 @@ price_boxplots <- price_comparison %>%
   ggplot(aes(x=Continent, y=value, fill=type)) +
   geom_boxplot() +
   theme_bw() +
-  theme(panel.grid = element_blank())
+  theme(panel.grid = element_blank(),
+        legend.title=element_blank()) +
+  labs(x="Continent", y='Price', title='Predicted vs True Price Distribution') +
+  scale_fill_manual(labels=c("True Price", "Predicted Price"),
+                    values=c('lightblue', 'salmon'))
 
 points_comparison <- prediction_data %>%
   select(c(points, points_pred, Continent)) %>%
@@ -21,7 +25,11 @@ points_boxplots <- points_comparison %>%
   ggplot(aes(x=Continent, y=value, fill=type)) +
   geom_boxplot() +
   theme_bw() +
-  theme(panel.grid = element_blank())
+  theme(panel.grid = element_blank(),
+        legend.title=element_blank()) +
+  labs(x="Continent", y='Points', title='Predicted vs True Points Distribution') +
+  scale_fill_manual(labels=c("True Points", "Predicted Points"),
+                    values=c('lightblue', 'salmon'))
 
 ggsave('figures/points-boxplots.png', points_boxplots)
 ggsave('figures/price-boxplots.png', price_boxplots)
