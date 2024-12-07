@@ -1,7 +1,11 @@
 library(tidyverse)
+library(Metrics)
 
 # Here we create figures that look at the results of the neural networks
 net_predictions <- read.csv('data/results/wine_predictions.csv')
+
+price_mae <- mae(net_predictions$price, net_predictions$price_pred)
+points_mae <- mae(net_predictions$points, net_predictions$points_pred)
 
 # Scatter plots of predicted vs actual values
 price_scatter <- net_predictions %>%
