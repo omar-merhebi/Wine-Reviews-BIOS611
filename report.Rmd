@@ -13,7 +13,7 @@ For this project, I am attempting to see if we can use a relatively simple neura
 ## Preliminary Data Exploration
 First, we want to take a look at overall trends and patterns in this dataset. First, I will take a look at the distribution of the target variables (price and points). First let's take a look at points:
 
-```{r, fig.pos="H", out.width="70%", echo=FALSE, fig.align="center", fig.cap='Barplot of wine counts by continent.'}
+```{r, fig.pos="H", out.width="60%", echo=FALSE, fig.align="center", fig.cap='Barplot of wine counts by continent.'}
 knitr::include_graphics('./figures/histogram-by-points.png')
 ```
 
@@ -69,3 +69,34 @@ knitr::include_graphics('./figures/pca-by-continent.png')
 ```
 
 It doesn't look like PCA helped resolve any differences across wine regions, but I honestly expected this due to factors like the data imbalance, sheer size and variance of this dataset, and the amount of words still kept. So, let's now move on to training a neural network. 
+
+## Neural Network Results
+I went ahead and trained two regression neural networks: one to predict price and the other, points. Both neural networks have the same architecture which looks like:
+
+```{r, fig.pos="H", fig.align="center", out.width="30%", echo=FALSE, fig.cap='Neural Network Architecture'}
+knitr::include_graphics('./figures/nn-diagram.png')
+```
+
+The networks each have three layers (besides the input layer) with a decreasing number of neurons in each subsequent layer, with one output neuron. Before training the networks, categorical variables in the data were one-hot encoded as this is standard practice in machine learning. The "Year" feature in this dataset was considered to be categorical, not numeric. The dataset was split into 80% training and 20% testing datasets and 20% of the training set was used as a validation datset during model training. 
+
+First, here are scatter plots showing the predicted price/points vs. the true price/points for the test set:
+
+```{r, fig.show='hold', fig.pos="H", out.width="50%", echo=FALSE, fig.cap='Scatterplot of predicted vs true price (left) and points (right) on the test set. The identity line signifies perfect predictions and is plotted in red. The mean absolute error (MAE) of each is shown at the top right.'}
+knitr::include_graphics('./figures/price_prediction_scatterplot.png')
+knitr::include_graphics('./figures/points_prediction_scatterplot.png')
+```
+
+The neural networks did okay, but not amazingly. We can see from the high degree of variance in predictions that it wasn't able to make very accurate assessments of the price or quality of the wine based on the descriptions. The MAEs are actually not too bad but I anticipate this is because the errors seemingly "average out" to a value close to zero and not because the neural network performed well. We can check to see if there were any biases in how well the neural network predicted points and price based on the region that the wine is from:
+
+```{r, fig.show='hold', fig.pos="H", out.width="50%", echo=FALSE, fig.cap='Boxplots showing the distribution of predicted vs true price (left) and points (right) on the test set broken down by continent of origin of the wine.'}
+knitr::include_graphics('./figures/price-boxplots.png')
+knitr::include_graphics('./figures/points-boxplots.png')
+```
+
+So starting with price, we can tell that the price prediction distribution actually matched up with the true distribution quite well and there didn't seem to be any bias by continent. For points, there was also not any bias by continent but there were major issues with this prediction, namely:
+
+The median of the distribution of predicted points was consistently much lower than the true median, and quite strikingly, the range of predicted points was much larger than the true range. The model predicted wines having a point value of over 200 when it's not even possible for a wine to have a value of greater than 100. There is something seriously wrong with this feature, either inherently in the dataset or in the construction of the neural network. I am not sure if the limited range of point values in the original dataset could have caused this. 
+
+## Conclusion
+
+Overall, this dataset may not have been ideal or may have required further preprocessing to build a reliable neural network capable of making predictions. Or, it's quite possible that wine reviewer's reviews don't at all reflect the quality or overall cost of the wine. It's quite possible that reviewers tend to highlight the positives and be over-complimentary and thus making it difficult to draw quantitative conclusions from their reviews. 
