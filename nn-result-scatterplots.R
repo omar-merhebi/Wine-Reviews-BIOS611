@@ -11,20 +11,22 @@ points_mae <- round(mae(net_predictions$points, net_predictions$points_pred), 3)
 price_scatter <- net_predictions %>%
   ggplot(aes(x=price, y=price_pred)) +
   geom_point(color='lightblue') + theme_bw() +
-  geom_abline(slope=1, color='red') +
+  geom_abline(slope=1, color='red', intercept=0) +
   theme(panel.grid = element_blank()) +
-  annotate("text", x=max(net_predictions$price)-1, 
+  annotate("text", x=max(net_predictions$price)-2, 
            y=max(net_predictions$price_pred),
-           label=paste("MAE: ", price_mae))
+           label=paste("MAE: ", price_mae)) +
+  labs(x='Price', y='Predicted Price', title='Price Prediction Neural Network')
 
 points_scatter <- net_predictions %>%
   ggplot(aes(x=points, y=points_pred)) + 
   geom_point(color='lightblue') + theme_bw() +
-  geom_abline(slope=1, color='red') +
+  geom_abline(slope=1, color='red', intercept = 0) +
   theme(panel.grid = element_blank()) +
-  annotate("text", x=max(net_predictions$points)-1, 
+  annotate("text", x=max(net_predictions$points)-2, 
            y=max(net_predictions$points_pred),
-           label=paste("MAE: ", points_mae))
+           label=paste("MAE: ", points_mae)) +
+  labs(x='Points', y='Predicted Points', title='Points Prediction Neural Network')
 
 ggsave('figures/price_prediction_scatterplot.png', plot=price_scatter)
 ggsave('figures/points_prediction_scatterplot.png', plot=points_scatter)
